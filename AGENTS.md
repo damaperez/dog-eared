@@ -3,7 +3,7 @@
 ## Site structure
 
 - This is a static website. Edit `Second Chance Toy Repair.html` as the source page.
-- Keep the logo and portrait image files in the repository root; Cloudflare Pages uses their existing filenames.
+- Keep the logo, portrait, and restoration photos in the repository root; add new restoration photos to `build.sh` so they are included in the deployed `dist/` assets.
 - The site is hosted on Cloudflare using Workers Static Assets. `wrangler.toml` runs `./build.sh` before deploy and serves the resulting `dist/` directory. The Workers Builds deploy command is `npx wrangler deploy`.
 
 ## Website changes

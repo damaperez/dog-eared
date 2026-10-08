@@ -139,6 +139,7 @@
   .toy-photo{position:relative; aspect-ratio:4/3; border:2px solid var(--ink); border-radius:2px; overflow:hidden;}
   .toy-panel{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; opacity:0;
     transform:scale(.94); transition:opacity .3s ease, transform .3s ease; pointer-events:none; }
+  .toy-panel img{width:100%; height:100%; object-fit:contain;}
   .toy-panel.active{opacity:1; transform:scale(1); pointer-events:auto;}
   .toy-panel.before{background:#FFE3EF;}
   .toy-panel.after{background:#DFF7E6;}
@@ -325,13 +326,13 @@
 
       <div class="toy-card">
         <div class="toy-photo">
-          <div class="toy-panel before" aria-hidden="true"><svg width="120" height="90" viewBox="0 0 120 90"><ellipse cx="60" cy="50" rx="38" ry="28" fill="#B08A54"/><circle cx="30" cy="30" r="14" fill="#B08A54"/><circle cx="90" cy="30" r="14" fill="#B08A54"/><path d="M40 55 L45 68 M40 55 L38 70" stroke="#6B4A28" stroke-width="2" fill="none" stroke-dasharray="3 3"/></svg></div>
-          <div class="toy-panel after active" aria-hidden="false"><svg width="120" height="90" viewBox="0 0 120 90"><ellipse cx="60" cy="50" rx="38" ry="28" fill="#B08A54"/><circle cx="30" cy="30" r="14" fill="#B08A54"/><circle cx="90" cy="30" r="14" fill="#B08A54"/><path d="M42 58 L48 70" stroke="#8B5CF6" stroke-width="2" fill="none" stroke-dasharray="2 2"/></svg></div>
+          <div class="toy-panel before" aria-hidden="true"><img src="Dino-before.JPG" alt="Dino the green dragon plush with tears and rips before repair"></div>
+          <div class="toy-panel after active" aria-hidden="false"><img src="Dino-after.jpg" alt="Dino the green dragon plush after seam repair and restuffing"></div>
         </div>
-        <div class="toggle-pill" role="group" aria-label="Biscuit's bear: before and after view"><button class="t-before" data-show="before" aria-pressed="false">Before</button><button class="t-after active-btn" data-show="after" aria-pressed="true">After</button></div>
+        <div class="toggle-pill" role="group" aria-label="Dino the green dragon: before and after view"><button class="t-before" data-show="before" aria-pressed="false">Before</button><button class="t-after active-btn" data-show="after" aria-pressed="true">After</button></div>
         <div class="caption">
-          <h3>Biscuit's bear — torn ear seam</h3>
-          <p>Reinforced seam repair on both ears plus a full wash. Turnaround: 3 days.</p>
+          <h3>Dino (green dragon) — tears and rips</h3>
+          <p>Reinforced seam repair on body. Reinforced stitching and stuffing refill. Turnaround: 3 days.</p>
         </div>
       </div>
 
