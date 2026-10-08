@@ -10,3 +10,5 @@ cp "Dino-before.JPG" dist/
 cp "Dino-after.jpg" dist/
 cp "Bottle-before.JPG" dist/
 cp "Bottle-after.JPG" dist/
+cp "weight-before.JPG" dist/
+cp "weight-after.JPG" dist/
