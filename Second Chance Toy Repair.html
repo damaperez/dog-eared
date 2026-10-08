@@ -67,7 +67,7 @@
     .nav > .btn{padding:8px 14px; font-size:14px; white-space:nowrap; flex-shrink:0;}
   }
 
-  .hero{ background:var(--purple); color:var(--white); padding:70px 0 44px; position:relative; overflow:hidden;
+  .hero{ background:var(--purple); color:var(--white); padding:clamp(124px,13vw,172px) 0 44px; position:relative; overflow:hidden;
     background-image: radial-gradient(rgba(255,255,255,0.14) 2px, transparent 2px); background-size:26px 26px; animation:drift 22s linear infinite; }
   .hero .wrap{position:relative; z-index:1;}
   .hero h1{ font-size:clamp(32px,5.5vw,54px); line-height:1.1; max-width:15ch; -webkit-text-stroke:2px var(--ink); text-shadow:4px 4px 0 var(--pink); }
@@ -77,9 +77,10 @@
   .hero-facts span{ background:var(--yellow); color:var(--ink); font-family:'Fredoka',sans-serif; font-weight:600; font-size:13.5px;
     padding:7px 14px; border-radius:999px; border:2px solid var(--ink); display:inline-block; transition:transform .2s ease; }
   .hero-facts span:hover{transform:translateY(-3px) rotate(-2deg);}
-  .ribbon{ position:absolute; top:22px; right:-2px; background:var(--yellow); color:var(--ink); font-family:'Fredoka',sans-serif;
-    font-weight:700; font-size:13px; padding:7px 16px; border:2.5px solid var(--ink); border-radius:999px 0 0 999px;
+  .ribbon{ position:absolute; top:clamp(16px,2.2vw,30px); right:-2px; background:var(--yellow); color:var(--ink); font-family:'Fredoka',sans-serif;
+    font-weight:700; font-size:clamp(16px,2vw,24px); padding:clamp(9px,1.2vw,16px) clamp(22px,3vw,42px); border:2.5px solid var(--ink); border-radius:999px 0 0 999px;
     transform:rotate(6deg); box-shadow:3px 3px 0 var(--ink); z-index:2; }
+  @media (max-width:680px){ .hero{padding-top:112px;} .ribbon{font-size:clamp(15px,4.2vw,18px); padding:9px clamp(18px,5vw,26px);} }
 
   section{padding:58px 0;}
   .section-head{max-width:56ch; margin-bottom:28px;}
@@ -208,7 +209,7 @@
   <span class="sticker" style="top:16%; left:6%; --r:-8deg; animation-delay:0s;">✨</span>
   <span class="sticker" style="bottom:16%; right:25%; --r:10deg; animation-delay:.8s;">⭐</span>
   <span class="sticker" style="top:15%; right:9%; font-size:20px; --r:-12deg; animation-delay:1.6s;">🐾</span>
-  <span class="ribbon">handmade w/ ❤️</span>
+  <span class="ribbon">hand-repaired w/ ❤️</span>
   <div class="wrap">
     <h1>Every worn plush deserves another chance at playtime.</h1>
     <p class="lede">Welcome! At Dog-Eared, I carefully hand-repair the plush toys your pet can't live without. Whether your stuffed animal needs new stuffing, a fresh squeaker, or just a few stitches, I'd love to bring it back to life!
@@ -326,10 +327,10 @@
 
       <div class="toy-card">
         <div class="toy-photo">
-          <div class="toy-panel before" aria-hidden="true"><img src="Dino-before.JPG" alt="Dino the green dragon plush with tears and rips before repair"></div>
-          <div class="toy-panel after active" aria-hidden="false"><img src="Dino-after.jpg" alt="Dino the green dragon plush after seam repair and restuffing"></div>
+          <div class="toy-panel before active" aria-hidden="false"><img src="Dino-before.JPG" alt="Dino the green dragon plush with tears and rips before repair"></div>
+          <div class="toy-panel after" aria-hidden="true"><img src="Dino-after.jpg" alt="Dino the green dragon plush after seam repair and restuffing"></div>
         </div>
-        <div class="toggle-pill" role="group" aria-label="Dino the green dragon: before and after view"><button class="t-before" data-show="before" aria-pressed="false">Before</button><button class="t-after active-btn" data-show="after" aria-pressed="true">After</button></div>
+        <div class="toggle-pill" role="group" aria-label="Dino the green dragon: before and after view"><button class="t-before active-btn" data-show="before" aria-pressed="true">Before</button><button class="t-after" data-show="after" aria-pressed="false">After</button></div>
         <div class="caption">
           <h3>Dino (green dragon) — tears and rips</h3>
           <p>Reinforced seam repair on body. Reinforced stitching and stuffing refill. Turnaround: 3 days.</p>
@@ -338,10 +339,10 @@
 
       <div class="toy-card">
         <div class="toy-photo">
-          <div class="toy-panel before" aria-hidden="true"><img src="Bottle-before.JPG" alt="Gatorade bottle plush with a tear, exposed stuffing, and worn seams before repair"></div>
-          <div class="toy-panel after active" aria-hidden="false"><img src="Bottle-after.JPG" alt="Gatorade bottle plush after seam and tear repair, restuffing, and squeaker replacement"></div>
+          <div class="toy-panel before active" aria-hidden="false"><img src="Bottle-before.JPG" alt="Gatorade bottle plush with a tear, exposed stuffing, and worn seams before repair"></div>
+          <div class="toy-panel after" aria-hidden="true"><img src="Bottle-after.JPG" alt="Gatorade bottle plush after seam and tear repair, restuffing, and squeaker replacement"></div>
         </div>
-        <div class="toggle-pill" role="group" aria-label="Pickles the elephant: before and after view"><button class="t-before" data-show="before" aria-pressed="false">Before</button><button class="t-after active-btn" data-show="after" aria-pressed="true">After</button></div>
+        <div class="toggle-pill" role="group" aria-label="Pickles the elephant: before and after view"><button class="t-before active-btn" data-show="before" aria-pressed="true">Before</button><button class="t-after" data-show="after" aria-pressed="false">After</button></div>
         <div class="caption">
           <h3>Pickles the elephant — mud puddle rescue</h3>
           <p>Full hand wash to lift ground-in mud and grass stains, then air-dried and fluffed.</p>
@@ -350,22 +351,22 @@
 
       <div class="toy-card extra-card">
         <div class="toy-photo">
-          <div class="toy-panel before" aria-hidden="true"><img src="weight-before.JPG" alt="Dumbbell gag toy with torn seams and exposed stuffing before repair"></div>
-          <div class="toy-panel after active" aria-hidden="false"><img src="weight-after.JPG" alt="Dumbbell gag toy after seam repair and restuffing"></div>
+          <div class="toy-panel before active" aria-hidden="false"><img src="weight-before.JPG" alt="Dumbbell gag toy with torn seams and exposed stuffing before repair"></div>
+          <div class="toy-panel after" aria-hidden="true"><img src="weight-after.JPG" alt="Dumbbell gag toy after seam repair and restuffing"></div>
         </div>
-        <div class="toggle-pill" role="group" aria-label="Mr. Waffles the giraffe: before and after view"><button class="t-before" data-show="before" aria-pressed="false">Before</button><button class="t-after active-btn" data-show="after" aria-pressed="true">After</button></div>
+        <div class="toggle-pill" role="group" aria-label="Mr. Waffles the giraffe: before and after view"><button class="t-before active-btn" data-show="before" aria-pressed="true">Before</button><button class="t-after" data-show="after" aria-pressed="false">After</button></div>
         <div class="caption">
-          <h3>Mr. Waffles the giraffe — silent squeak</h3>
-          <p>New squeaker installed, seam re-sewn to match original stitching.</p>
+          <h3>Dumbbell gag toy — seam repair and restuffing</h3>
+          <p>Odd-angle tears on multiple layers of fabric. Turnaround: 3-5 days</p>
         </div>
       </div>
 
       <div class="toy-card extra-card">
         <div class="toy-photo">
-          <div class="toy-panel before" aria-hidden="true"><svg width="120" height="90" viewBox="0 0 120 90"><ellipse cx="60" cy="55" rx="30" ry="22" fill="#D9C4A0"/><path d="M60 33 Q50 15 60 8 Q70 15 60 33 Z" fill="#D9C4A0"/><path d="M45 58 Q60 50 75 58" stroke="#8A6B48" stroke-width="2" fill="none" stroke-dasharray="3 3"/></svg></div>
-          <div class="toy-panel after active" aria-hidden="false"><svg width="120" height="90" viewBox="0 0 120 90"><ellipse cx="60" cy="55" rx="30" ry="26" fill="#D9C4A0"/><path d="M60 33 Q50 15 60 8 Q70 15 60 33 Z" fill="#D9C4A0"/><path d="M46 60 Q60 68 74 60" stroke="#8B5CF6" stroke-width="2" fill="none"/></svg></div>
+          <div class="toy-panel before active" aria-hidden="false"><svg width="120" height="90" viewBox="0 0 120 90"><ellipse cx="60" cy="55" rx="30" ry="22" fill="#D9C4A0"/><path d="M60 33 Q50 15 60 8 Q70 15 60 33 Z" fill="#D9C4A0"/><path d="M45 58 Q60 50 75 58" stroke="#8A6B48" stroke-width="2" fill="none" stroke-dasharray="3 3"/></svg></div>
+          <div class="toy-panel after" aria-hidden="true"><svg width="120" height="90" viewBox="0 0 120 90"><ellipse cx="60" cy="55" rx="30" ry="26" fill="#D9C4A0"/><path d="M60 33 Q50 15 60 8 Q70 15 60 33 Z" fill="#D9C4A0"/><path d="M46 60 Q60 68 74 60" stroke="#8B5CF6" stroke-width="2" fill="none"/></svg></div>
         </div>
-        <div class="toggle-pill" role="group" aria-label="Bunny lovey: before and after view"><button class="t-before" data-show="before" aria-pressed="false">Before</button><button class="t-after active-btn" data-show="after" aria-pressed="true">After</button></div>
+        <div class="toggle-pill" role="group" aria-label="Bunny lovey: before and after view"><button class="t-before active-btn" data-show="before" aria-pressed="true">Before</button><button class="t-after" data-show="after" aria-pressed="false">After</button></div>
         <div class="caption">
           <h3>Bunny lovey — flat and floppy</h3>
           <p>Full restuffing to bring back its shape, plus a gentle wash. Ten years old and still going.</p>
