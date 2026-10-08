@@ -171,6 +171,9 @@
   .row2{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
   @media (max-width:480px){ .row2{grid-template-columns:1fr;} }
   .form-note{font-size:13px; color:var(--ink); opacity:.65; font-weight:600;}
+  .form-status{font-size:14px; font-weight:700; color:var(--ink);}
+  .form-status:empty{display:none;}
+  .form-honeypot{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; clip-path:inset(50%);}
 
   .fab{ position:fixed; bottom:calc(18px + env(safe-area-inset-bottom,0px)); right:18px; width:56px; height:56px; border-radius:50%;
     background:var(--pink); border:3px solid var(--ink); display:flex; align-items:center; justify-content:center; font-size:24px;
@@ -393,23 +396,28 @@
       <div class="row2">
         <div class="field">
           <label for="name">Your name</label>
-          <input type="text" id="name" placeholder="Jamie Rivera" required>
+          <input type="text" id="name" name="name" autocomplete="name" placeholder="Jamie Rivera" required>
         </div>
         <div class="field">
           <label for="email">Your email</label>
-          <input type="email" id="email" placeholder="jamie@example.com" required>
+          <input type="email" id="email" name="email" autocomplete="email" placeholder="jamie@example.com" required>
         </div>
       </div>
       <div class="field">
         <label for="toy">Toy name / description</label>
-        <input type="text" id="toy" placeholder="e.g. Plush bear, brown, about 12 inches" required>
+        <input type="text" id="toy" name="toy" placeholder="e.g. Plush bear, brown, about 12 inches" required>
       </div>
       <div class="field">
         <label for="message">What needs fixing?</label>
-        <textarea id="message" rows="4" placeholder="Torn seam on the left ear, stuffing coming out, squeaker no longer works..." required></textarea>
+        <textarea id="message" name="message" rows="4" placeholder="Torn seam on the left ear, stuffing coming out, squeaker no longer works..." required></textarea>
       </div>
-      <p class="form-note">Your email app will open with your message addressed to Demi.</p>
-      <button type="submit" class="btn btn-pink" style="align-self:flex-start;">Send me an email 💌</button>
+      <div class="form-honeypot" aria-hidden="true">
+        <label for="website">Leave this field empty</label>
+        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+      </div>
+      <p class="form-note">Your message will be sent directly to Demi. You won't need to open an email app.</p>
+      <p id="formStatus" class="form-status" role="status" aria-live="polite"></p>
+      <button type="submit" id="contactSubmit" class="btn btn-pink" style="align-self:flex-start;">Send message 💌</button>
     </form>
   </div>
 </section>
@@ -424,16 +432,39 @@
 <a href="#contact" id="fab" class="fab" aria-label="Email me">💌</a>
 
 <script>
-  // contact form -> mailto
-  document.getElementById('contactForm').addEventListener('submit', function(e){
+  // Contact form sends to the site's same-origin Worker endpoint.
+  document.getElementById('contactForm').addEventListener('submit', async function(e){
     e.preventDefault();
-    var name = document.getElementById('name').value;
-    var email = document.getElementById('email').value;
-    var toy = document.getElementById('toy').value;
-    var message = document.getElementById('message').value;
-    var subject = encodeURIComponent(toy);
-    var body = encodeURIComponent('Name: ' + name + '\n' + 'Email: ' + email + '\n' + 'Toy: ' + toy + '\n\n' + 'Details:\n' + message);
-    window.location.href = 'mailto:demi@scaddenfamily.com?subject=' + subject + '&body=' + body;
+    var form = e.currentTarget;
+    var button = document.getElementById('contactSubmit');
+    var status = document.getElementById('formStatus');
+    var originalLabel = button.textContent;
+    status.textContent = '';
+    button.disabled = true;
+    button.textContent = 'Sending…';
+
+    try {
+      var response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          name: form.elements.name.value,
+          email: form.elements.email.value,
+          toy: form.elements.toy.value,
+          message: form.elements.message.value,
+          website: form.elements.website.value
+        })
+      });
+      var result = await response.json();
+      if (!response.ok || !result.ok) throw new Error(result.error || 'Please try again.');
+      form.reset();
+      status.textContent = 'Thanks! Your message is on its way. Demi will get back to you soon.';
+    } catch (error) {
+      status.textContent = error.message || 'We couldn’t send your message. Please try again or email Demi directly.';
+    } finally {
+      button.disabled = false;
+      button.textContent = originalLabel;
+    }
   });
 
   // services accordion
