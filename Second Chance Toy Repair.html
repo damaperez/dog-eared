@@ -4,13 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Dog-Eared Plush Repair Co.</title>
+<link rel="icon" type="image/png" href="Varsity%20Letterman%401x.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Permanent+Marker&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
-    --pink:#FF4FA0; --blue:#2F8FFF; --skyblue:#E7F3FF; --yellow:#FFD400;
-    --purple:#8B5CF6; --green:#1FAE6B; --paper:#FFF8E4; --ink:#20223A; --white:#FFFFFF;
+    --pink:#FF4FA0; --pink-ink:#B3125D; --blue:#2F8FFF; --blue-ink:#1D5AA6; --skyblue:#E7F3FF; --yellow:#FFD400;
+    --purple:#7447D0; --green:#1FAE6B; --paper:#FFF8E4; --ink:#20223A; --white:#FFFFFF;
     padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px);
   }
   *{box-sizing:border-box;}
@@ -23,6 +24,7 @@
   img,svg{max-width:100%; display:block;}
   .marker{font-family:'Permanent Marker',cursive; font-weight:400;}
   button{font:inherit; cursor:pointer;}
+  :focus-visible{outline:3px solid var(--ink); outline-offset:4px;}
 
   @keyframes float{0%,100%{transform:translateY(0) rotate(var(--r,0deg));} 50%{transform:translateY(-10px) rotate(var(--r,0deg));}}
   @keyframes wiggle{0%,100%{transform:rotate(0deg);} 25%{transform:rotate(-6deg);} 75%{transform:rotate(6deg);}}
@@ -42,21 +44,28 @@
   header{ position:sticky; top:0; z-index:20; background:var(--yellow); border-bottom:3px solid var(--ink); padding-top:env(safe-area-inset-top,0px); }
   .nav{ display:flex; align-items:center; justify-content:space-between; padding:12px 28px; max-width:960px; margin:0 auto; }
   .brand{display:flex; align-items:center; gap:12px;}
-  .logo-slot{ width:58px; height:58px; flex-shrink:0; transform:rotate(-6deg); transition:transform .3s ease; }
+  .logo-slot{ width:58px; height:58px; flex-shrink:0; overflow:hidden; border-radius:50%; background:transparent; transform:rotate(-6deg); transition:transform .3s ease; }
   .logo-slot:hover{transform:rotate(6deg) scale(1.08);}
-  .logo-slot img{width:100%; height:100%; object-fit:contain;}
+  .logo-slot img{width:100%; height:100%; object-fit:cover; border-radius:50%; transform:scale(1.18);}
   .brand-name{font-family:'Fredoka',sans-serif; font-size:19px; font-weight:700; transform:rotate(-1deg);}
   nav.links{display:flex; gap:22px; font-size:15px; font-weight:700; font-family:'Fredoka',sans-serif;}
   nav.links a{text-decoration:none; color:var(--ink); transition:color .15s;}
-  nav.links a:hover{color:var(--pink);}
+  nav.links a:hover{color:var(--pink-ink);}
   .btn{ display:inline-block; padding:11px 22px; border-radius:999px; font-weight:700; font-size:15px; text-decoration:none;
     font-family:'Fredoka',sans-serif; border:3px solid var(--ink); box-shadow:4px 4px 0 var(--ink); transition:transform .15s, box-shadow .15s; }
   .btn:hover{ transform:translate(2px,2px); box-shadow:2px 2px 0 var(--ink); }
   .btn:active{transform:translate(4px,4px); box-shadow:0 0 0 var(--ink);}
-  .btn-pink{background:var(--pink); color:var(--white);}
-  .btn-blue{background:var(--blue); color:var(--white);}
+  .btn-pink{background:var(--pink); color:var(--ink);}
+  .btn-blue{background:var(--blue); color:var(--ink);}
   .btn-yellow{background:var(--yellow); color:var(--ink);}
   @media (max-width:680px){ nav.links{display:none;} }
+  @media (max-width:420px){
+    .nav{padding:10px 16px; gap:10px;}
+    .brand{gap:8px; min-width:0;}
+    .logo-slot{width:48px; height:48px;}
+    .brand-name{font-size:16px; line-height:1.15;}
+    .nav > .btn{padding:8px 14px; font-size:14px; white-space:nowrap; flex-shrink:0;}
+  }
 
   .hero{ background:var(--purple); color:var(--white); padding:70px 0 44px; position:relative; overflow:hidden;
     background-image: radial-gradient(rgba(255,255,255,0.14) 2px, transparent 2px); background-size:26px 26px; animation:drift 22s linear infinite; }
@@ -76,7 +85,7 @@
   .section-head{max-width:56ch; margin-bottom:28px;}
   .section-head h2{font-size:30px;}
   .section-head p{color:var(--ink); opacity:.75; margin-top:10px; font-size:16px; font-weight:600;}
-  .hint{font-family:'Fredoka',sans-serif; font-size:13px; font-weight:600; opacity:.65; margin-top:8px;}
+  .hint{font-family:'Fredoka',sans-serif; font-size:13px; font-weight:600; opacity:.9; margin-top:8px;}
 
   .reveal{opacity:0; transform:translateY(18px); transition:opacity .5s ease, transform .5s ease;}
   .reveal.is-visible{opacity:1; transform:translateY(0);}
@@ -92,22 +101,23 @@
   .polaroid .cap{ margin-top:10px; text-align:center; font-family:'Permanent Marker',cursive; font-size:15px; color:var(--ink); }
   .about blockquote{ font-family:'Fredoka',sans-serif; font-size:20px; line-height:1.5; color:var(--ink); background:var(--white);
     border:3px solid var(--ink); border-radius:16px; padding:20px 24px; box-shadow:5px 5px 0 var(--pink); margin:0 0 18px; }
-  .about .signoff{margin-top:4px; font-family:'Permanent Marker',cursive; font-size:15px; color:var(--blue);}
+  .about .signoff{margin-top:4px; font-family:'Permanent Marker',cursive; font-size:15px; color:var(--blue-ink);}
 
   .services{background:var(--skyblue); background-image: radial-gradient(rgba(139,92,246,0.14) 2px, transparent 2px); background-size:24px 24px;}
   .services-list{display:flex; flex-direction:column; gap:14px;}
   .service-card{ background:var(--white); border:3px solid var(--ink); border-radius:16px; box-shadow:4px 4px 0 var(--ink); overflow:hidden; }
-  .service-head{ width:100%; background:none; border:none; display:grid; grid-template-columns:auto 1fr auto auto;
+  .service-head{ width:100%; background:none; border:none; display:grid; grid-template-columns:auto minmax(0,1fr) auto auto;
     gap:6px 16px; align-items:center; padding:16px 18px; text-align:left; }
   .service-head:hover{background:rgba(139,92,246,0.06);}
   .badge{ width:44px; height:44px; border-radius:50%; display:flex; align-items:center; justify-content:center;
     font-size:18px; color:var(--white); border:3px solid var(--ink); flex-shrink:0; transition:transform .25s ease; }
   .service-head:hover .badge{animation:wiggle .5s ease;}
   .service-head h3{font-size:18px; font-weight:700;}
-  .service-head .price{font-family:'Fredoka',sans-serif; font-size:17px; font-weight:700; color:var(--pink); white-space:nowrap;}
+  .service-head .price{font-family:'Fredoka',sans-serif; font-size:17px; font-weight:700; color:var(--pink-ink); white-space:nowrap;}
   .chevron{font-family:'Fredoka',sans-serif; font-size:16px; transition:transform .3s ease; color:var(--ink); opacity:.6;}
   .service-head.is-open .chevron{transform:rotate(180deg);}
-  @media (max-width:560px){ .service-head{grid-template-columns:auto 1fr auto;} .service-head .price{grid-column:2; justify-self:start; margin-top:2px;} .service-head .chevron{grid-row:1/3;} }
+  @media (max-width:560px){ .service-head{grid-template-columns:auto minmax(0,1fr) auto;} .service-head .price{grid-column:2; justify-self:start; margin-top:2px;} .service-head .chevron{grid-column:3; grid-row:1/3; justify-self:center;} }
+  @media (max-width:360px){ .service-head h3{font-size:16px;} }
   .service-detail-wrap{display:grid; grid-template-rows:0fr; transition:grid-template-rows .35s ease;}
   .service-detail-wrap.open{grid-template-rows:1fr;}
   .service-detail-inner{overflow:hidden;}
@@ -116,8 +126,8 @@
   .wash-note{ margin-top:22px; background:var(--yellow); border:3px solid var(--ink); border-radius:16px; padding:16px 20px;
     font-size:15px; font-weight:700; color:var(--ink); box-shadow:4px 4px 0 var(--ink); }
 
-  .gallery{background:var(--pink); color:var(--white); background-image: radial-gradient(rgba(255,255,255,0.2) 2px, transparent 2px); background-size:24px 24px;}
-  .gallery .section-head p{color:#FFE3F1; opacity:1;}
+  .gallery{background:var(--pink); color:var(--ink); background-image: radial-gradient(rgba(255,255,255,0.2) 2px, transparent 2px); background-size:24px 24px;}
+  .gallery .section-head p{color:var(--ink); opacity:1;}
   .gallery-grid{display:grid; grid-template-columns:1fr 1fr; gap:26px;}
   @media (max-width:680px){ .gallery-grid{grid-template-columns:1fr;} }
   .extra-card{display:none;}
@@ -141,13 +151,15 @@
   .toy-card .caption p{margin-top:5px; font-size:13.5px; opacity:.75; font-weight:600;}
   .gallery-note{margin-top:10px; font-size:14px; text-align:center; font-weight:700; font-family:'Fredoka',sans-serif;}
   #galleryToggle{margin:22px auto 0; display:block;}
+  .services .wrap,.gallery .wrap{max-width:1280px; padding-inline:clamp(16px,3vw,40px);}
+  .services .section-head,.gallery .section-head{max-width:80ch;}
 
-  .contact{background:var(--green); color:var(--white); background-image: radial-gradient(rgba(255,255,255,0.16) 2px, transparent 2px); background-size:24px 24px; animation:drift 22s linear infinite;}
-  .contact .section-head p{color:#DFFCEC; opacity:1;}
+  .contact{background:var(--green); color:var(--ink); background-image: radial-gradient(rgba(255,255,255,0.16) 2px, transparent 2px); background-size:24px 24px; animation:drift 22s linear infinite;}
+  .contact .section-head p{color:var(--ink); opacity:1;}
   .contact .grid{display:grid; grid-template-columns:0.85fr 1.15fr; gap:48px;}
   @media (max-width:760px){ .contact .grid{grid-template-columns:1fr;} }
   .contact-list{margin-top:22px; display:flex; flex-direction:column; gap:14px; font-size:15px; font-weight:600;}
-  .contact-list .k{font-family:'Fredoka',sans-serif; color:#CFFAE1; font-size:13px; display:block; margin-bottom:2px;}
+  .contact-list .k{font-family:'Fredoka',sans-serif; color:var(--ink); font-size:13px; display:block; margin-bottom:2px;}
   .contact-list a{text-decoration:underline;}
 
   form{ background:var(--white); border:3px solid var(--ink); border-radius:18px; padding:24px; box-shadow:6px 6px 0 var(--ink);
@@ -176,7 +188,7 @@
 <header>
   <div class="nav">
     <div class="brand">
-      <div class="logo-slot"><img src="Varsity%20Letterman%401x.png" alt="Dog-Eared Plush Repair Co. logo"></div>
+      <div class="logo-slot"><img src="Varsity%20Letterman%401x.png" alt="" aria-hidden="true"></div>
       <div class="brand-name">Dog-Eared<br>Plush Repair Co.</div>
     </div>
     <nav class="links">
@@ -239,57 +251,57 @@
     </div>
     <div class="services-list reveal">
       <div class="service-card">
-        <button class="service-head" aria-expanded="false">
+        <button class="service-head" aria-expanded="false" aria-controls="service-detail-1">
           <span class="badge" style="background:var(--yellow);">🪡</span>
           <h3>Seam &amp; tear repair</h3>
           <span class="price">$15–$35</span>
           <span class="chevron">⌄</span>
         </button>
-        <div class="service-detail-wrap"><div class="service-detail-inner">
+        <div class="service-detail-wrap" id="service-detail-1" aria-hidden="true"><div class="service-detail-inner">
           <p>Hand-stitched closure of split seams, chewed-through edges, and loose limbs, matched to the toy's original thread color where possible.</p>
         </div></div>
       </div>
       <div class="service-card">
-        <button class="service-head" aria-expanded="false">
+        <button class="service-head" aria-expanded="false" aria-controls="service-detail-2">
           <span class="badge" style="background:var(--blue);">🔊</span>
           <h3>Squeaker replacement</h3>
           <span class="price">$10</span>
           <span class="chevron">⌄</span>
         </button>
-        <div class="service-detail-wrap"><div class="service-detail-inner">
+        <div class="service-detail-wrap" id="service-detail-2" aria-hidden="true"><div class="service-detail-inner">
           <p>Swap in a new squeaker when the old one has gone silent or missing — includes opening and re-sewing the seam.</p>
         </div></div>
       </div>
       <div class="service-card">
-        <button class="service-head" aria-expanded="false">
+        <button class="service-head" aria-expanded="false" aria-controls="service-detail-3">
           <span class="badge" style="background:var(--green);">🧸</span>
           <h3>Restuffing</h3>
           <span class="price">$12–$25</span>
           <span class="chevron">⌄</span>
         </button>
-        <div class="service-detail-wrap"><div class="service-detail-inner">
+        <div class="service-detail-wrap" id="service-detail-3" aria-hidden="true"><div class="service-detail-inner">
           <p>Top off flattened, lumpy, or lost stuffing so the toy holds its shape again — varies by toy size.</p>
         </div></div>
       </div>
       <div class="service-card">
-        <button class="service-head" aria-expanded="false">
+        <button class="service-head" aria-expanded="false" aria-controls="service-detail-4">
           <span class="badge" style="background:var(--purple);">🛁</span>
           <h3>Toy wash</h3>
           <span class="price">$6 / toy</span>
           <span class="chevron">⌄</span>
         </button>
-        <div class="service-detail-wrap"><div class="service-detail-inner">
+        <div class="service-detail-wrap" id="service-detail-4" aria-hidden="true"><div class="service-detail-inner">
           <p>Gentle machine wash cycle using 100% perfume- and dye-free detergent. Toys are fluffed and air-dried. Suitable for most plush toys. Free with first service for new customers; $6 per toy after that or if booked on its own.</p>
         </div></div>
       </div>
       <div class="service-card">
-        <button class="service-head" aria-expanded="false">
+        <button class="service-head" aria-expanded="false" aria-controls="service-detail-5">
           <span class="badge" style="background:var(--pink); color:var(--ink);">✨</span>
           <h3>Full restoration</h3>
           <span class="price">from $40</span>
           <span class="chevron">⌄</span>
         </button>
-        <div class="service-detail-wrap"><div class="service-detail-inner">
+        <div class="service-detail-wrap" id="service-detail-5" aria-hidden="true"><div class="service-detail-inner">
           <p>Repair, restuff, and wash combined — for toys that need a little bit of everything! Does not include squeaker replacement.</p>
         </div></div>
       </div>
@@ -310,10 +322,10 @@
 
       <div class="toy-card">
         <div class="toy-photo">
-          <div class="toy-panel before"><svg width="120" height="90" viewBox="0 0 120 90"><ellipse cx="60" cy="50" rx="38" ry="28" fill="#B08A54"/><circle cx="30" cy="30" r="14" fill="#B08A54"/><circle cx="90" cy="30" r="14" fill="#B08A54"/><path d="M40 55 L45 68 M40 55 L38 70" stroke="#6B4A28" stroke-width="2" fill="none" stroke-dasharray="3 3"/></svg></div>
-          <div class="toy-panel after active"><svg width="120" height="90" viewBox="0 0 120 90"><ellipse cx="60" cy="50" rx="38" ry="28" fill="#B08A54"/><circle cx="30" cy="30" r="14" fill="#B08A54"/><circle cx="90" cy="30" r="14" fill="#B08A54"/><path d="M42 58 L48 70" stroke="#8B5CF6" stroke-width="2" fill="none" stroke-dasharray="2 2"/></svg></div>
+          <div class="toy-panel before" aria-hidden="true"><svg width="120" height="90" viewBox="0 0 120 90"><ellipse cx="60" cy="50" rx="38" ry="28" fill="#B08A54"/><circle cx="30" cy="30" r="14" fill="#B08A54"/><circle cx="90" cy="30" r="14" fill="#B08A54"/><path d="M40 55 L45 68 M40 55 L38 70" stroke="#6B4A28" stroke-width="2" fill="none" stroke-dasharray="3 3"/></svg></div>
+          <div class="toy-panel after active" aria-hidden="false"><svg width="120" height="90" viewBox="0 0 120 90"><ellipse cx="60" cy="50" rx="38" ry="28" fill="#B08A54"/><circle cx="30" cy="30" r="14" fill="#B08A54"/><circle cx="90" cy="30" r="14" fill="#B08A54"/><path d="M42 58 L48 70" stroke="#8B5CF6" stroke-width="2" fill="none" stroke-dasharray="2 2"/></svg></div>
         </div>
-        <div class="toggle-pill"><button class="t-before" data-show="before">Before</button><button class="t-after active-btn" data-show="after">After</button></div>
+        <div class="toggle-pill" role="group" aria-label="Biscuit's bear: before and after view"><button class="t-before" data-show="before" aria-pressed="false">Before</button><button class="t-after active-btn" data-show="after" aria-pressed="true">After</button></div>
         <div class="caption">
           <h3>Biscuit's bear — torn ear seam</h3>
           <p>Reinforced seam repair on both ears plus a full wash. Turnaround: 3 days.</p>
@@ -322,10 +334,10 @@
 
       <div class="toy-card">
         <div class="toy-photo">
-          <div class="toy-panel before"><svg width="120" height="90" viewBox="0 0 120 90"><ellipse cx="60" cy="52" rx="34" ry="24" fill="#8C7355" opacity="0.85"/><path d="M45 45 q5 10 -2 16 M75 45 q-5 10 2 16" stroke="#4A3B28" stroke-width="2" fill="none"/><circle cx="40" cy="60" r="2.5" fill="#4A3B28"/><circle cx="80" cy="58" r="2.5" fill="#4A3B28"/></svg></div>
-          <div class="toy-panel after active"><svg width="120" height="90" viewBox="0 0 120 90"><ellipse cx="60" cy="52" rx="34" ry="24" fill="#D9C4A0"/><circle cx="30" cy="20" r="3" fill="#8FD9FF"/><circle cx="90" cy="22" r="3" fill="#8FD9FF"/><circle cx="60" cy="14" r="3" fill="#8FD9FF"/></svg></div>
+          <div class="toy-panel before" aria-hidden="true"><svg width="120" height="90" viewBox="0 0 120 90"><ellipse cx="60" cy="52" rx="34" ry="24" fill="#8C7355" opacity="0.85"/><path d="M45 45 q5 10 -2 16 M75 45 q-5 10 2 16" stroke="#4A3B28" stroke-width="2" fill="none"/><circle cx="40" cy="60" r="2.5" fill="#4A3B28"/><circle cx="80" cy="58" r="2.5" fill="#4A3B28"/></svg></div>
+          <div class="toy-panel after active" aria-hidden="false"><svg width="120" height="90" viewBox="0 0 120 90"><ellipse cx="60" cy="52" rx="34" ry="24" fill="#D9C4A0"/><circle cx="30" cy="20" r="3" fill="#8FD9FF"/><circle cx="90" cy="22" r="3" fill="#8FD9FF"/><circle cx="60" cy="14" r="3" fill="#8FD9FF"/></svg></div>
         </div>
-        <div class="toggle-pill"><button class="t-before" data-show="before">Before</button><button class="t-after active-btn" data-show="after">After</button></div>
+        <div class="toggle-pill" role="group" aria-label="Pickles the elephant: before and after view"><button class="t-before" data-show="before" aria-pressed="false">Before</button><button class="t-after active-btn" data-show="after" aria-pressed="true">After</button></div>
         <div class="caption">
           <h3>Pickles the elephant — mud puddle rescue</h3>
           <p>Full hand wash to lift ground-in mud and grass stains, then air-dried and fluffed.</p>
@@ -334,10 +346,10 @@
 
       <div class="toy-card extra-card">
         <div class="toy-photo">
-          <div class="toy-panel before"><svg width="120" height="90" viewBox="0 0 120 90"><rect x="30" y="25" width="60" height="45" rx="18" fill="#8CA6A0"/><circle cx="45" cy="45" r="4" fill="#333"/><circle cx="75" cy="45" r="4" fill="#333"/><path d="M50 55 Q60 45 70 55" stroke="#5C7A73" stroke-width="2" fill="none" stroke-dasharray="3 3"/></svg></div>
-          <div class="toy-panel after active"><svg width="120" height="90" viewBox="0 0 120 90"><rect x="30" y="25" width="60" height="45" rx="18" fill="#8CA6A0"/><circle cx="45" cy="45" r="4" fill="#333"/><circle cx="75" cy="45" r="4" fill="#333"/><path d="M52 54 Q60 62 68 54" stroke="#8B5CF6" stroke-width="2" fill="none"/></svg></div>
+          <div class="toy-panel before" aria-hidden="true"><svg width="120" height="90" viewBox="0 0 120 90"><rect x="30" y="25" width="60" height="45" rx="18" fill="#8CA6A0"/><circle cx="45" cy="45" r="4" fill="#333"/><circle cx="75" cy="45" r="4" fill="#333"/><path d="M50 55 Q60 45 70 55" stroke="#5C7A73" stroke-width="2" fill="none" stroke-dasharray="3 3"/></svg></div>
+          <div class="toy-panel after active" aria-hidden="false"><svg width="120" height="90" viewBox="0 0 120 90"><rect x="30" y="25" width="60" height="45" rx="18" fill="#8CA6A0"/><circle cx="45" cy="45" r="4" fill="#333"/><circle cx="75" cy="45" r="4" fill="#333"/><path d="M52 54 Q60 62 68 54" stroke="#8B5CF6" stroke-width="2" fill="none"/></svg></div>
         </div>
-        <div class="toggle-pill"><button class="t-before" data-show="before">Before</button><button class="t-after active-btn" data-show="after">After</button></div>
+        <div class="toggle-pill" role="group" aria-label="Mr. Waffles the giraffe: before and after view"><button class="t-before" data-show="before" aria-pressed="false">Before</button><button class="t-after active-btn" data-show="after" aria-pressed="true">After</button></div>
         <div class="caption">
           <h3>Mr. Waffles the giraffe — silent squeak</h3>
           <p>New squeaker installed, seam re-sewn to match original stitching.</p>
@@ -346,10 +358,10 @@
 
       <div class="toy-card extra-card">
         <div class="toy-photo">
-          <div class="toy-panel before"><svg width="120" height="90" viewBox="0 0 120 90"><ellipse cx="60" cy="55" rx="30" ry="22" fill="#D9C4A0"/><path d="M60 33 Q50 15 60 8 Q70 15 60 33 Z" fill="#D9C4A0"/><path d="M45 58 Q60 50 75 58" stroke="#8A6B48" stroke-width="2" fill="none" stroke-dasharray="3 3"/></svg></div>
-          <div class="toy-panel after active"><svg width="120" height="90" viewBox="0 0 120 90"><ellipse cx="60" cy="55" rx="30" ry="26" fill="#D9C4A0"/><path d="M60 33 Q50 15 60 8 Q70 15 60 33 Z" fill="#D9C4A0"/><path d="M46 60 Q60 68 74 60" stroke="#8B5CF6" stroke-width="2" fill="none"/></svg></div>
+          <div class="toy-panel before" aria-hidden="true"><svg width="120" height="90" viewBox="0 0 120 90"><ellipse cx="60" cy="55" rx="30" ry="22" fill="#D9C4A0"/><path d="M60 33 Q50 15 60 8 Q70 15 60 33 Z" fill="#D9C4A0"/><path d="M45 58 Q60 50 75 58" stroke="#8A6B48" stroke-width="2" fill="none" stroke-dasharray="3 3"/></svg></div>
+          <div class="toy-panel after active" aria-hidden="false"><svg width="120" height="90" viewBox="0 0 120 90"><ellipse cx="60" cy="55" rx="30" ry="26" fill="#D9C4A0"/><path d="M60 33 Q50 15 60 8 Q70 15 60 33 Z" fill="#D9C4A0"/><path d="M46 60 Q60 68 74 60" stroke="#8B5CF6" stroke-width="2" fill="none"/></svg></div>
         </div>
-        <div class="toggle-pill"><button class="t-before" data-show="before">Before</button><button class="t-after active-btn" data-show="after">After</button></div>
+        <div class="toggle-pill" role="group" aria-label="Bunny lovey: before and after view"><button class="t-before" data-show="before" aria-pressed="false">Before</button><button class="t-after active-btn" data-show="after" aria-pressed="true">After</button></div>
         <div class="caption">
           <h3>Bunny lovey — flat and floppy</h3>
           <p>Full restuffing to bring back its shape, plus a gentle wash. Ten years old and still going.</p>
@@ -431,6 +443,7 @@
       var open = wrap.classList.toggle('open');
       btn.classList.toggle('is-open', open);
       btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      wrap.setAttribute('aria-hidden', open ? 'false' : 'true');
     });
   });
 
@@ -439,8 +452,16 @@
     btn.addEventListener('click', function(){
       var card = btn.closest('.toy-card');
       var show = btn.dataset.show;
-      card.querySelectorAll('.toy-panel').forEach(function(p){ p.classList.toggle('active', p.classList.contains(show)); });
-      card.querySelectorAll('.toggle-pill button').forEach(function(b){ b.classList.toggle('active-btn', b === btn); });
+      card.querySelectorAll('.toy-panel').forEach(function(p){
+        var visible = p.classList.contains(show);
+        p.classList.toggle('active', visible);
+        p.setAttribute('aria-hidden', visible ? 'false' : 'true');
+      });
+      card.querySelectorAll('.toggle-pill button').forEach(function(b){
+        var selected = b === btn;
+        b.classList.toggle('active-btn', selected);
+        b.setAttribute('aria-pressed', selected ? 'true' : 'false');
+      });
     });
   });
 
