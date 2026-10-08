@@ -1,0 +1,8 @@
+name = "dog-eared-plush-repair"
+compatibility_date = "2026-10-08"
+
+[build]
+command = "./build.sh"
+
+[assets]
+directory = "./dist"
