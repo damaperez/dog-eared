@@ -12,3 +12,5 @@ cp "Bottle-before.JPG" dist/
 cp "Bottle-after.JPG" dist/
 cp "weight-before.JPG" dist/
 cp "weight-after.JPG" dist/
+cp "bear-before.JPG" dist/
+cp "bear-after.JPG" dist/
