@@ -4,7 +4,7 @@
 
 - This is a static website. Edit `Second Chance Toy Repair.html` as the source page.
 - Keep the logo, portrait, and restoration photos in the repository root; add new restoration photos to `build.sh` so they are included in the deployed `dist/` assets.
-- The site is hosted on Cloudflare using Workers Static Assets. `wrangler.toml` runs `./build.sh` before deploy and serves the resulting `dist/` directory. The Workers Builds deploy command is `npx wrangler deploy`.
+- The site is hosted on Cloudflare using Workers Static Assets. `wrangler.toml` runs `./build.sh` before deploy and serves the resulting `dist/` directory. Cloudflare Workers Builds is connected to this GitHub repository and automatically deploys pushes to `main`; pushing to GitHub is the deployment step. Workers Builds runs `npx wrangler deploy`. Do not run a separate manual deploy after pushing unless the user explicitly asks for one or the automatic deployment failed and a retry is needed.
 
 ## Website changes
 
