@@ -1,6 +1,6 @@
 const MAX_BODY_LENGTH = 12_000;
 const MAX_FIELD_LENGTH = 2_000;
-const RECIPIENT = "demi@scaddenfamily.com";
+const RECIPIENT = "contact@dogearedplush.com";
 const SENDER = "contact@dogearedplush.com";
 
 function json(data, status = 200) {
