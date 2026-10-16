@@ -14,3 +14,4 @@ cp "weight-before.JPG" dist/
 cp "weight-after.JPG" dist/
 cp "bear-before.JPG" dist/
 cp "bear-after.JPG" dist/
+cp "Dogeared Plush Repair Logo.png" dist/
