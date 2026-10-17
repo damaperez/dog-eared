@@ -74,7 +74,7 @@ export default {
     try {
       await env.EMAIL.send({
         to: RECIPIENT,
-        from: { email: SENDER, name: "Dog-Eared Plush Repair Co." },
+        from: { email: SENDER, name: "DogEared Plush Repair Co." },
         replyTo: email,
         subject: toy,
         text: `Name: ${name}\nEmail: ${email}\nToy: ${toy}\n\nDetails:\n${details}`,
